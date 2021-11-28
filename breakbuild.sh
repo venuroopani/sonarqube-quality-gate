@@ -39,7 +39,7 @@ wait_for_success=true
 while [ "${wait_for_success}" = "true" ]
 do
   ########################################################################################################################
-  curl -s -u "${SONAR_ACCESS_TOKEN}": "${SONAR_INSTANCE}"/api/ce/task?id=${ce_task_id} >file
+  curl -u "admin":"${SONAR_ACCESS_TOKEN}" "${SONAR_INSTANCE}"/api/ce/task?id=${ce_task_id} >file
   cat file
   ########################################################################################################################
   ce_status=$(curl -s -u "${SONAR_ACCESS_TOKEN}": "${SONAR_INSTANCE}"/api/ce/task?id=${ce_task_id} | jq -r .task.status)
