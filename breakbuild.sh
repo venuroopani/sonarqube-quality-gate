@@ -38,11 +38,8 @@ wait_for_success=true
 
 while [ "${wait_for_success}" = "true" ]
 do
-  ########################################################################################################################
-  curl -u "admin":"${SONAR_ACCESS_TOKEN}" "${SONAR_INSTANCE}"/api/ce/task?id=${ce_task_id} >file
-  cat file
-  ########################################################################################################################
-  ce_status=$(curl -s -u "${SONAR_ACCESS_TOKEN}": "${SONAR_INSTANCE}"/api/ce/task?id=${ce_task_id} | jq -r .task.status)
+
+  ce_status=$(curl -u admin:admin123 http://192.168.33.10:9000/api/ce/task?id=${ce_task_id} | jq -r .task.status)
 
   echo "QG Script --> Status of SonarQube task is ${ce_status}"
 
@@ -64,11 +61,11 @@ do
 
 done
 
-ce_analysis_id=$(curl -s -u $SONAR_ACCESS_TOKEN: $SONAR_INSTANCE/api/ce/task?id=$ce_task_id | jq -r .task.analysisId)
+ce_analysis_id=$(curl -u admin:admin123 http://192.168.33.10:9000/api/ce/task?id=$ce_task_id | jq -r .task.analysisId)
 echo "QG Script --> Using analysis id of ${ce_analysis_id}"
 
 # get the status of the quality gate for this analysisId
-qg_status=$(curl -s -u $SONAR_ACCESS_TOKEN: $SONAR_INSTANCE/api/qualitygates/project_status?analysisId="${ce_analysis_id}" | jq -r .projectStatus.status)
+qg_status=$(curl -u admin:admin123 http://192.168.33.10:9000/api/qualitygates/project_status?analysisId="${ce_analysis_id}" | jq -r .projectStatus.status)
 echo "QG Script --> Quality Gate status is ${qg_status}"
 
 if [ "${qg_status}" != "OK" ]; then
