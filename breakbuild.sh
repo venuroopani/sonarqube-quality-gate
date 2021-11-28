@@ -15,8 +15,8 @@ REPORT_PATH=".scannerwork/report-task.txt"
 #REPORT_PATH=".sonar/report-task.txt"
 CE_TASK_ID_KEY="ceTaskId="
 
-SONAR_INSTANCE="${1}"
-SONAR_ACCESS_TOKEN="${2}"
+#SONAR_INSTANCE="${1}"
+#SONAR_ACCESS_TOKEN="${2}"
 SLEEP_TIME=5
 
 echo "QG Script --> Using SonarQube instance ${SONAR_INSTANCE}"
